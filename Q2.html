@@ -1,0 +1,196 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Q2</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-11-07"><meta name="DC.source" content="Q2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><p><b>Question 2</b></p><pre class="codeinput"><span class="comment">%Part a) done in MATLAB, parts b) and c) in Python</span>
+</pre><p><b>Part a) It is done by using dwt2 to decompose it into two frequency components (High and Low) and the same is plotted.</b></p><pre class="codeinput">clc;
+clear <span class="string">all</span>;
+
+FXY_CAMERAMAN = imread(<span class="string">'cameraman.jpg'</span>);
+FXY_LENNA = imread(<span class="string">'lenna.jpg'</span>);
+
+
+
+
+figure;
+imshow(FXY_CAMERAMAN);title(<span class="string">"Cameraman Image"</span>);
+
+[LF_COMPONENTS_DB,HF_COMPONENTS_DB] = dwt2(FXY_CAMERAMAN,<span class="string">'db2'</span>,<span class="string">'mode'</span>,<span class="string">'sym'</span>);
+[LF_COMPONENTS_HAAR,HF_COMPONENTS_HAAR] = dwt2(FXY_CAMERAMAN,<span class="string">'haar'</span>,<span class="string">'mode'</span>,<span class="string">'sym'</span>);
+
+
+figure;
+subplot(2,2,1);
+imshow(uint8(LF_COMPONENTS_HAAR));title(<span class="string">"Low Freq Coefficients HAAR - Cameraman"</span>)
+subplot(2,2,2);
+imshow(HF_COMPONENTS_HAAR);title(<span class="string">"High Freq Coefficients HAAR - Cameraman"</span>)
+subplot(2,2,3);
+imshow(uint8(LF_COMPONENTS_DB));title(<span class="string">"Low Freq Coefficients DB - Cameraman"</span>)
+subplot(2,2,4);
+imshow(HF_COMPONENTS_DB);title(<span class="string">"High Freq Coefficients DB - Cameraman"</span>)
+
+
+
+
+
+
+figure;
+imshow(FXY_LENNA);title(<span class="string">"Lenna Image"</span>);
+
+[LF_COMPONENTS_DB,HF_COMPONENTS_DB] = dwt2(FXY_LENNA,<span class="string">'db2'</span>,<span class="string">'mode'</span>,<span class="string">'sym'</span>);
+[LF_COMPONENTS_HAAR,HF_COMPONENTS_HAAR] = dwt2(FXY_LENNA,<span class="string">'haar'</span>,<span class="string">'mode'</span>,<span class="string">'sym'</span>);
+
+
+
+figure;
+subplot(2,2,1);
+imshow(uint8(LF_COMPONENTS_HAAR)); title(<span class="string">"Low Freq Coefficients HAAR  - Lenna"</span>)
+subplot(2,2,2);
+imshow(HF_COMPONENTS_HAAR);title(<span class="string">"High Freq Coefficients HAAR - Lenna"</span>)
+
+subplot(2,2,3);
+imshow(uint8(LF_COMPONENTS_DB)); title(<span class="string">"Low Freq Coefficients DB - Lenna"</span>)
+subplot(2,2,4);
+imshow(HF_COMPONENTS_DB);title(<span class="string">"High Freq Coefficients DB -Lenna"</span>)
+</pre><img vspace="5" hspace="5" src="Q2_01.png" alt=""> <img vspace="5" hspace="5" src="Q2_02.png" alt=""> <img vspace="5" hspace="5" src="Q2_03.png" alt=""> <img vspace="5" hspace="5" src="Q2_04.png" alt=""> <p><b>Observation in Part a):</b></p><div><ul><li><b>The low frequency components contains an approximate image to the original image. The approximate image is somewhat blurred.</b></li><li><b>The High Frequency components contain edge information</b></li><li><b>The low frequency components in each image is almost same for HAAR as well as DB</b></li><li><b>The high frequency components in each image is different when HAAR is used vs DB</b></li><li><b>Using Haar (High Frequency), the edges are visible and it is apparent to naked eye that edges are present. While as using DB, the High frequency components dont show edges so clearly</b></li></ul></div><pre class="codeinput"><span class="comment">%</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%
+% *Question 2*
+%Part a) done in MATLAB, parts b) and c) in Python
+
+%%
+% *Part a) It is done by using dwt2 to decompose it into two frequency
+% components (High and Low) and the same is plotted.*
+
+clc;
+clear all;
+
+FXY_CAMERAMAN = imread('cameraman.jpg');
+FXY_LENNA = imread('lenna.jpg');
+
+
+
+
+figure;
+imshow(FXY_CAMERAMAN);title("Cameraman Image");
+
+[LF_COMPONENTS_DB,HF_COMPONENTS_DB] = dwt2(FXY_CAMERAMAN,'db2','mode','sym');
+[LF_COMPONENTS_HAAR,HF_COMPONENTS_HAAR] = dwt2(FXY_CAMERAMAN,'haar','mode','sym');
+
+
+figure;
+subplot(2,2,1); 
+imshow(uint8(LF_COMPONENTS_HAAR));title("Low Freq Coefficients HAAR - Cameraman")
+subplot(2,2,2); 
+imshow(HF_COMPONENTS_HAAR);title("High Freq Coefficients HAAR - Cameraman")
+subplot(2,2,3); 
+imshow(uint8(LF_COMPONENTS_DB));title("Low Freq Coefficients DB - Cameraman")
+subplot(2,2,4); 
+imshow(HF_COMPONENTS_DB);title("High Freq Coefficients DB - Cameraman")
+
+
+
+
+
+
+figure;
+imshow(FXY_LENNA);title("Lenna Image");
+
+[LF_COMPONENTS_DB,HF_COMPONENTS_DB] = dwt2(FXY_LENNA,'db2','mode','sym');
+[LF_COMPONENTS_HAAR,HF_COMPONENTS_HAAR] = dwt2(FXY_LENNA,'haar','mode','sym');
+
+
+
+figure;
+subplot(2,2,1); 
+imshow(uint8(LF_COMPONENTS_HAAR)); title("Low Freq Coefficients HAAR  - Lenna")
+subplot(2,2,2); 
+imshow(HF_COMPONENTS_HAAR);title("High Freq Coefficients HAAR - Lenna")
+
+subplot(2,2,3);
+imshow(uint8(LF_COMPONENTS_DB)); title("Low Freq Coefficients DB - Lenna")
+subplot(2,2,4); 
+imshow(HF_COMPONENTS_DB);title("High Freq Coefficients DB -Lenna")
+
+
+%%
+% *Observation in Part a):*
+%%
+% 
+% * *The low frequency components contains an approximate image to the original image. The approximate image is somewhat blurred.*
+% * *The High Frequency components contain edge information*
+% * *The low frequency components in each image is almost same for HAAR as well as DB*
+% * *The high frequency components in each image is different when HAAR is used vs DB*
+% * *Using Haar (High Frequency), the edges are visible and it is apparent to naked eye that edges are present. While as using DB, the High frequency components dont show edges so clearly*
+
+
+
+% 
+
+##### SOURCE END #####
+--></body></html>
